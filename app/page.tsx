@@ -11,8 +11,6 @@ export default function IndexPage() {
         <div className="flex max-w-[980px] flex-col items-start gap-2">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-6xl">
             Alcanza tu máximo potencial fitness
-
-
           </h1>
           <p className="max-w-[700px]  text-lg text-muted-foreground">
             ¡Convierte tu cuerpo en una obra maestra con Flex-Track!

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Services() {
+function page() {
     return (
         <section className="text-gray-400 bg-gray-900 body-font">
             <div className="container px-5 py-24 mx-auto">
@@ -56,4 +56,4 @@ function Services() {
     )
 }
 
-export default Services
+export default page
