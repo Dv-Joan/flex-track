@@ -1,8 +1,10 @@
+'use client'
 import Link from "next/link"
 import Image from "next/image"
 import bannerImage from "@/assets/images/banner.jpg"
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
+import AOSWrapper from "@/lib/aos"
 
 export default function IndexPage() {
   return (
@@ -29,7 +31,10 @@ export default function IndexPage() {
 
 
       </div>
-      <Image className="relative opacity-30" alt="banner" src={bannerImage} width={1000} height={1000} />
+      <AOSWrapper data-aos="fade-zoom-in" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600">
+        <Image className="relative opacity-30" alt="banner" src={bannerImage} width={1000} height={1000} />
+      </AOSWrapper>
+
     </section>
   )
 }
