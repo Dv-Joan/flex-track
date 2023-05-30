@@ -1,18 +1,42 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next.js",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+  name: "Flex Track",
+  description: "Fullstack solution designed for FlexTrack Inc GYM company ",
   mainNav: [
     {
       title: "Home",
       href: "/",
     },
+    {
+      title: "Services",
+      href: "/services",
+    },
+    {
+      title: "Products",
+      href: "/products",
+    },
+    {
+      title: "Contact",
+      href: "/contact",
+    },
+  ],
+  footerNav: [
+    {
+      title: "Services",
+      href: "/about",
+    },
+    {
+      title: "Contact",
+      href: "/contact",
+    },
+    {
+      title: "Privacy Policy",
+      href: "/privacy-policy",
+    },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
     docs: "https://ui.shadcn.com",
+    twitter: "https://twitter.com/shadcn",
   },
 }
