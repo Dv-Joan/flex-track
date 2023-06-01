@@ -5,10 +5,6 @@ export const siteConfig = {
   description: "Fullstack solution designed for FlexTrack Inc GYM company ",
   mainNav: [
     {
-      title: "Home",
-      href: "/",
-    },
-    {
       title: "Services",
       href: "/services",
     },
