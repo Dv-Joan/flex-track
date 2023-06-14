@@ -5,8 +5,8 @@ export const siteConfig = {
   description: "Fullstack solution designed for FlexTrack Inc GYM company ",
   mainNav: [
     {
-      title: "Services",
-      href: "/services",
+      title: "Plans",
+      href: "/plans",
     },
     {
       title: "Products",
@@ -19,8 +19,8 @@ export const siteConfig = {
   ],
   footerNav: [
     {
-      title: "Services",
-      href: "/about",
+      title: "Plans",
+      href: "/plans",
     },
     {
       title: "Contact",

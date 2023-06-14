@@ -2,7 +2,7 @@ import React from 'react'
 
 function page() {
     return (
-        <section className="text-gray-400 body-font">
+        <section className="text-gray-400 body-font ">
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-col">
                     <div className="h-1 overflow-hidden bg-gray-800 rounded">
@@ -52,6 +52,7 @@ function page() {
                     </div>
                 </div>
             </div>
+
         </section>
     )
 }
