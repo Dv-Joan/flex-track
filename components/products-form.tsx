@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -17,35 +16,63 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Title } from "@radix-ui/react-toast"
-import { toast } from "./ui/use-toast"
+const INITIAL_FORM_VALUES = {
+    name: "",
+    brand: "",
+    description: "",
+    price: "",
+    quantity: "",
+    status: "",
+}
+
 
 const formSchema = z.object({
-    productName: z.string().min(2, {
-        message: "Product name must be at least 2 characters.",
+    name: z.string().min(3, {
+        message: "Product name must be at least 3 characters.",
     }),
-    productBrand: z.string().min(2, {
+    brand: z.string().min(2, {
         message: "Model name must be at least 2 characters.",
     }),
-    productDescription: z.string().min(10, {
-        message: "Description must be at least 10 characters.",
+    description: z.string().min(10),
+    price: z.number().min(1, {
+        message: "Price must be at least 1.",
     }),
+    quantity: z.number().min(1, {
+        message: "Quantity must be at least 1.",
+    }).max(500, {
+        message: "Quantity must be at most 500.",
+    }),
+    status: z.enum(["pending", "processing", "success", "failed"]),
+
 
 })
 
 export function ProductForm() {
     const form = useForm({
         resolver: zodResolver(formSchema),
-    })
+    });
+
+
     function onSubmit(data) {
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
+        console.log(data);
+        // Lógica para enviar el formulario y luego llamar a fetchProducts
+        fetch("http://localhost:3052/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
         })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result); // Puedes mostrar una notificación o mensaje de éxito si lo deseas
+
+            })
+            .catch((error) => {
+                console.error("Error al enviar el formulario", error);
+            });
     }
+
 
 
     return (
@@ -58,7 +85,7 @@ export function ProductForm() {
 
                     <FormField
                         control={form.control}
-                        name="productName"
+                        name="name"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Product</FormLabel>
@@ -71,7 +98,7 @@ export function ProductForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="productBrand"
+                        name="brand"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Brand</FormLabel>
@@ -85,7 +112,7 @@ export function ProductForm() {
                 </div>
                 <FormField
                     control={form.control}
-                    name="productDescription"
+                    name="description"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Description</FormLabel>
@@ -96,8 +123,45 @@ export function ProductForm() {
                         </FormItem>
                     )}
                 />
+                {/* <div className="flex gap-3.5">
 
-                <Button type="submit">Submit</Button>
+                    <FormField
+                        control={form.control}
+                        name="price"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Price</FormLabel>
+                                <FormControl>
+                                    <Input type="number" defaultValue={5} placeholder="$ 40.59" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="quantity"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Quantity</FormLabel>
+                                <FormControl>
+                                    <Input type="number" placeholder="3 " {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div */}
+                <div className="flex justify-between">
+
+                    <Button className="px-14" type="submit">Submit</Button>
+
+                    <Button onClick={
+                        () => {
+                            form.reset(INITIAL_FORM_VALUES)
+                        }
+                    } className="px-14" variant='outline'>Cancel</Button>
+                </div>
             </form>
         </Form>
     )
