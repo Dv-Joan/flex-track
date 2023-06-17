@@ -1,30 +1,37 @@
-import fs from "fs"
-import path from "path"
 import { NextApiRequest, NextApiResponse } from "next"
 
-const dbPath = path.join(__dirname, "./../../data/products.json")
-
-const productsApi = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-    const { name, brand, description, price, quantity, status } = req.body
-    const newProduct = {
-      id: Math.random().toString(36).substr(2, 9),
-      name,
-      brand,
-      description,
-      price,
-      quantity,
-      status,
-    }
-
-    const db = JSON.parse(fs.readFileSync(dbPath, "utf8"))
-    db.products.push(newProduct)
-    fs.writeFileSync(dbPath, JSON.stringify(db))
-
-    return res
-      .status(200)
-      .json({ message: "Product added", product: newProduct })
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { method } = req
+  switch (method) {
+    case "GET":
+      return res.json({ message: "GET" })
+    case "POST":
+      return res.json({ message: "POST" })
+    default:
+      return res.json({ message: "No method" })
   }
+  /* switch (method) {
+    case "GET":
+      try {
+        const products = await Product.find({})
+        res.status(200).json({ success: true, data: products })
+      } catch (error) {
+        res.status(400).json({ success: false })
+      }
+      break
+    case "POST":
+      try {
+        const product = await Product.create(req.body)
+        res.status(201).json({ success: true, data: product })
+      } catch (error) {
+        res.status(400).json({ success: false })
+      }
+      break
+    default:
+      res.status(400).json({ success: false })
+      break
+  } */
 }
-
-module.exports = productsApi

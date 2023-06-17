@@ -6,14 +6,14 @@ import { Product, columns } from "./columns";
 import { DataTable } from "./data-table";
 
 async function getData(): Promise<Product[]> {
-    const response = await fetch("http://localhost:3052/products", {
+    const response = await fetch("http://localhost:3001/products", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         },
     });
     const data = await response.json();
-    return data;
+    return data
 }
 
 export default function Page() {

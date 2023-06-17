@@ -20,9 +20,9 @@ const INITIAL_FORM_VALUES = {
     name: "",
     brand: "",
     description: "",
-    price: "",
+    /* price: "",
     quantity: "",
-    status: "",
+    status: "", */
 }
 
 
@@ -34,7 +34,7 @@ const formSchema = z.object({
         message: "Model name must be at least 2 characters.",
     }),
     description: z.string().min(10),
-    price: z.number().min(1, {
+    /* price: z.number().min(1, {
         message: "Price must be at least 1.",
     }),
     quantity: z.number().min(1, {
@@ -42,7 +42,7 @@ const formSchema = z.object({
     }).max(500, {
         message: "Quantity must be at most 500.",
     }),
-    status: z.enum(["pending", "processing", "success", "failed"]),
+    status: z.enum(["pending", "processing", "success", "failed"]), */
 
 
 })
@@ -53,11 +53,11 @@ export function ProductForm() {
     });
 
 
-    function onSubmit(data) {
+    function onSubmit(data: any) {
         console.log(data);
         // Lógica para enviar el formulario y luego llamar a fetchProducts
-        fetch("http://localhost:3052/products", {
-            method: "POST",
+        fetch("http://localhost:3001/products", {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -66,7 +66,6 @@ export function ProductForm() {
             .then((response) => response.json())
             .then((result) => {
                 console.log(result); // Puedes mostrar una notificación o mensaje de éxito si lo deseas
-
             })
             .catch((error) => {
                 console.error("Error al enviar el formulario", error);
