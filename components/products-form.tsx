@@ -1,9 +1,7 @@
 "use client"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -20,9 +18,9 @@ const INITIAL_FORM_VALUES = {
     name: "",
     brand: "",
     description: "",
-    /* price: "",
+    price: "",
     quantity: "",
-    status: "", */
+    status: "",
 }
 
 
@@ -34,7 +32,7 @@ const formSchema = z.object({
         message: "Model name must be at least 2 characters.",
     }),
     description: z.string().min(10),
-    /* price: z.number().min(1, {
+    price: z.number().min(1, {
         message: "Price must be at least 1.",
     }),
     quantity: z.number().min(1, {
@@ -42,7 +40,7 @@ const formSchema = z.object({
     }).max(500, {
         message: "Quantity must be at most 500.",
     }),
-    status: z.enum(["pending", "processing", "success", "failed"]), */
+    status: z.enum(["pending", "processing", "success", "failed"]),
 
 
 })
@@ -122,7 +120,7 @@ export function ProductForm() {
                         </FormItem>
                     )}
                 />
-                {/* <div className="flex gap-3.5">
+                <div className="flex gap-3.5">
 
                     <FormField
                         control={form.control}
@@ -150,7 +148,7 @@ export function ProductForm() {
                             </FormItem>
                         )}
                     />
-                </div */}
+                </div >
                 <div className="flex justify-between">
 
                     <Button className="px-14" type="submit">Submit</Button>

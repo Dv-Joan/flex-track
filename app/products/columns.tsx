@@ -2,37 +2,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
-export type Product = {
-  id: string
-  name: string
-  status?: "pending" | "processing" | "success" | "failed"
-  brand: string
-  description: string
-  price: number
-  quantity: number
-
-}
-
-export const products: Product[] = [
-  {
-    id: "728ed52f",
-    name: "Short",
-    status: "pending",
-    brand: "Under Armour",
-    description: "Short products description",
-    price: 40.59,
-    quantity: 10,
-  },
-  {
-    id: "7258ed52f",
-    name: "Short",
-    status: "processing",
-    brand: "Under Armour",
-    description: "Short products description",
-    price: 40.59,
-    quantity: 10,
-  },
-]
+import { Product } from "@/types/product"
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -75,11 +45,19 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: () => {
+    cell: ({ }) => {
       return (
         <div className="flex gap-2">
-          <Button variant='outline' className="btn btn-primary">Edit</Button>
-          <Button variant='destructive' className="btn btn-primary">Delete</Button>
+          <Button variant='outline' onClick={
+            () => {
+              alert('edit')
+            }
+          } className="btn btn-primary">Edit</Button>
+          <Button variant='destructive' onClick={
+            () => {
+              alert('delete')
+            }
+          } className="btn btn-primary">Delete</Button>
         </div>
       )
     }

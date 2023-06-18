@@ -17,6 +17,15 @@
       "status": "processing",
       "price": 80.58,
       "quantity": 10
+    },
+    {
+      "id": "7858ed51f",
+      "name": "Short",
+      "brand": "Under Armour",
+      "description": "Short products description",
+      "status": "processing",
+      "price": 80.58,
+      "quantity": 10
     }
   ]
 }

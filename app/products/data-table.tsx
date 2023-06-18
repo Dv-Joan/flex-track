@@ -20,11 +20,13 @@ import { Title } from "@radix-ui/react-toast"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    handleDelete: (id: string) => void
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    handleDelete
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
@@ -63,10 +65,22 @@ export function DataTable<TData, TValue>({
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
+
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        <TableCell
+                                            key={cell.id}
+                                            className="px-6 py-4 whitespace-nowrap"
+                                        >
+                                            {
+                                                flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext(),
+
+
+                                                )
+
+                                            }
                                         </TableCell>
                                     ))}
                                 </TableRow>

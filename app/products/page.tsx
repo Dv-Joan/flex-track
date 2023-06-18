@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "@/components/product-card";
 import { ProductForm } from "@/components/products-form";
-import { Product, columns } from "./columns";
+import { columns } from "./columns";
+import { Product } from "@/types/product";
 import { DataTable } from "./data-table";
 
 async function getData(): Promise<Product[]> {
@@ -17,7 +18,14 @@ async function getData(): Promise<Product[]> {
 }
 
 export default function Page() {
+
     const [data, setData] = useState<Product[]>([]);
+    const handleDelete = async (id: string) => {
+        await fetch(`http://localhost:3001/products/${id}`, {
+            method: "DELETE",
+        });
+        fetchProducts();
+    };
 
     useEffect(() => {
         fetchProducts();
@@ -58,7 +66,7 @@ export default function Page() {
             </section>
             <div className="flex gap-7">
                 <ProductForm />
-                <DataTable data={data} columns={columns} />
+                <DataTable handleDelete={handleDelete} data={data} columns={columns} />
             </div>
         </div>
     );
