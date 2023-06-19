@@ -6,35 +6,56 @@ import { columns } from "./columns";
 import { Product } from "@/types/product";
 import { DataTable } from "./data-table";
 
-async function getData(): Promise<Product[]> {
-    const response = await fetch("http://localhost:3001/products", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-    const data = await response.json();
-    return data
-}
+
 
 export default function Page() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [product, setProduct] = useState<Product>({} as Product);
 
-    const [data, setData] = useState<Product[]>([]);
-    const handleDelete = async (id: string) => {
-        await fetch(`http://localhost:3001/products/${id}`, {
-            method: "DELETE",
+    const handleDelete = async (product: Product) => {
+
+        const productId = product.id
+
+        const productsModified = products?.filter(
+            (product) => product.id != productId
+        );
+        setProducts(productsModified);
+
+        const res = await fetch(`@/pages/api/products/${productId}`, {
+            method: "DELETE"
         });
-        fetchProducts();
+
+        const data = await res.json();
+
+        if (res.ok) {
+            console.log(data);
+        } else {
+            console.log("error");
+        }
+    };
+
+    const getData = async () => {
+        try {
+            const res = await fetch("@/pages/api/products");
+            if (res.ok) {
+                const dataGet = await res.json();
+                setProducts(dataGet);
+            } else {
+                throw new Error("Error al obtener los datos de los products");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
-        fetchProducts();
+        getData();
     }, []);
 
-    const fetchProducts = async () => {
-        const products = await getData();
-        setData(products);
-    };
+    if (!products) {
+        return <div>Cargando...</div>;
+    }
+
 
     return (
         <div className="flex flex-col gap-20 mx-14 my-7">
@@ -65,8 +86,18 @@ export default function Page() {
                 />
             </section>
             <div className="flex gap-7">
-                <ProductForm />
-                <DataTable handleDelete={handleDelete} data={data} columns={columns} />
+                <ProductForm
+                    product={product}
+                    setProduct={setProduct}
+                    products={products}
+                    setProducts={setProducts}
+
+
+                />
+                <DataTable
+                    setProducts={setProducts}
+                    products={products}
+                    handleDelete={handleDelete} data={products} columns={columns} />
             </div>
         </div>
     );

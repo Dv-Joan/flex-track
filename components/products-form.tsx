@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
+import { v4 as uuidv4 } from "uuid"
 import {
     Form,
     FormControl,
@@ -14,6 +15,8 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Title } from "@radix-ui/react-toast"
+import { Product } from "@/types/product"
+import { useEffect } from "react"
 const INITIAL_FORM_VALUES = {
     name: "",
     brand: "",
@@ -44,31 +47,64 @@ const formSchema = z.object({
 
 
 })
+type FormProps = {
+    products: Product[]
+    product: Product
+    setProducts: (product: Product[]) => void
+    setProduct: (product: Product) => void
+}
 
-export function ProductForm() {
+export function ProductForm({
+    products, product, setProducts, setProduct
+
+}: FormProps) {
+    const { register, setValue, formState: { errors } } = useForm();
     const form = useForm({
         resolver: zodResolver(formSchema),
     });
 
+    useEffect(() => {
+        if (Object.keys(products).length
+            && Object.keys(product).length) {
+            setValue("name", product.name);
+            setValue("brand", product.brand);
+            setValue("description", product.description);
+            setValue("price", product.price);
+            setValue("quantity", product.quantity);
+            setValue("status", product.status);
+        }
+    }, [product]);
 
-    function onSubmit(data: any) {
-        console.log(data);
-        // Lógica para enviar el formulario y luego llamar a fetchProducts
-        fetch("http://localhost:3001/products", {
-            method: "PUT",
+
+
+    const onSubmit = async (values: any) => {
+        const { name, brand, description, price, quantity, status } = values;
+        const newProduct = {
+            name,
+            brand,
+            description,
+            price,
+            quantity,
+            status,
+        };
+        const res = await fetch("@/pages/api/products", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result); // Puedes mostrar una notificación o mensaje de éxito si lo deseas
-            })
-            .catch((error) => {
-                console.error("Error al enviar el formulario", error);
-            });
-    }
+            body: JSON.stringify(newProduct),
+        });
+        const data = await res.json();
+        data.id = uuidv4();
+        setProducts([...products, data]);
+        setProduct(data);
+        if (data) {
+            alert("enviado");
+        } else {
+            alert("error");
+        }
+    };
+
 
 
 

@@ -16,6 +16,7 @@
       "description": "Short products description",
       "status": "processing",
       "price": 80.58,
+      "image": "https://picsum.photos/200",
       "quantity": 10
     },
     {
@@ -25,6 +26,7 @@
       "description": "Short products description",
       "status": "processing",
       "price": 80.58,
+      "image": "https://picsum.photos/200",
       "quantity": 10
     }
   ]

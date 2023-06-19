@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { Product } from "@/types/product"
 
+
+
 export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "name",
@@ -45,12 +47,12 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ }) => {
+    cell: ({ row }) => {
       return (
         <div className="flex gap-2">
           <Button variant='outline' onClick={
             () => {
-              alert('edit')
+
             }
           } className="btn btn-primary">Edit</Button>
           <Button variant='destructive' onClick={
