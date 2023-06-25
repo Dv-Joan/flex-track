@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
+import { v4 as uuidv4 } from "uuid"
 import {
     Form,
     FormControl,
@@ -14,12 +15,17 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Title } from "@radix-ui/react-toast"
+<<<<<<< HEAD
 import {
     useMutation,
     useQueryClient,
 
 } from '@tanstack/react-query'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+=======
+import { Product } from "@/types/product"
+import { useEffect } from "react"
+>>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
 const INITIAL_FORM_VALUES = {
     id: "asdasd5484",
     name: "Laptop",
@@ -48,23 +54,66 @@ const formSchema = z.object({
 
 
 })
+type FormProps = {
+    products: Product[]
+    product: Product
+    setProducts: (product: Product[]) => void
+    setProduct: (product: Product) => void
+}
 
+<<<<<<< HEAD
 
 export function ProductForm() {
+=======
+export function ProductForm({
+    products, product, setProducts, setProduct
+
+}: FormProps) {
+    const { register, setValue, formState: { errors } } = useForm();
+>>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: INITIAL_FORM_VALUES,
     });
     const queryClient = useQueryClient()
 
+    useEffect(() => {
+        if (Object.keys(products).length
+            && Object.keys(product).length) {
+            setValue("name", product.name);
+            setValue("brand", product.brand);
+            setValue("description", product.description);
+            setValue("price", product.price);
+            setValue("quantity", product.quantity);
+            setValue("status", product.status);
+        }
+    }, [product]);
 
+<<<<<<< HEAD
     const postProduct = async (newProduct: any) => {
         const res = await fetch('http://localhost:3001/products', {
             method: 'POST',
             body: JSON.stringify(newProduct),
+=======
+
+
+    const onSubmit = async (values: any) => {
+        const { name, brand, description, price, quantity, status } = values;
+        const newProduct = {
+            name,
+            brand,
+            description,
+            price,
+            quantity,
+            status,
+        };
+        const res = await fetch("@/pages/api/products", {
+            method: "POST",
+>>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
             headers: {
                 'Content-Type': 'application/json'
             },
+<<<<<<< HEAD
         })
         return res.json()
     }
@@ -87,6 +136,21 @@ export function ProductForm() {
         mutation.mutate(data)
         console.log(data)
     }
+=======
+            body: JSON.stringify(newProduct),
+        });
+        const data = await res.json();
+        data.id = uuidv4();
+        setProducts([...products, data]);
+        setProduct(data);
+        if (data) {
+            alert("enviado");
+        } else {
+            alert("error");
+        }
+    };
+
+>>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
 
 
 

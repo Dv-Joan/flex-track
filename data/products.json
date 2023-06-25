@@ -16,9 +16,11 @@
       "description": "Short products description",
       "status": "for pricing",
       "price": 80.58,
+      "image": "https://picsum.photos/200",
       "quantity": 10
     },
     {
+<<<<<<< HEAD
       "name": "Laptop",
       "brand": "HP",
       "description": "A laptop for gaming and work.",
@@ -77,6 +79,16 @@
       "price": "250",
       "quantity": "11",
       "id": "6OQ8WE3"
+=======
+      "id": "7858ed51f",
+      "name": "Short",
+      "brand": "Under Armour",
+      "description": "Short products description",
+      "status": "processing",
+      "price": 80.58,
+      "image": "https://picsum.photos/200",
+      "quantity": 10
+>>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
     }
   ]
 }

@@ -20,7 +20,10 @@ import { headers } from "./table-headers"
 
 interface DataTableProps<TData, TValue> {
     data: TData[]
-    handleDelete: (id: string) => void
+    handleDelete: (product: TData) => void
+    setProducts: (product: TData[]) => void
+    products: TData[]
+
 }
 
 export function DataTable<TData, TValue>({
@@ -58,6 +61,7 @@ export function DataTable<TData, TValue>({
 
                     </TableHeader>
                     <TableBody>
+<<<<<<< HEAD
                         {
                             query.data ?
                                 (query.data.map((product: Product) => (
@@ -66,6 +70,32 @@ export function DataTable<TData, TValue>({
                                     >
                                         <TableCell>
                                             {product.name}
+=======
+                        {table.getRowModel().rows?.length ? (
+                            table.getRowModel().rows.map((row) => (
+                                <TableRow
+
+                                    key={row.id}
+                                    data-state={row.getIsSelected() && "selected"}
+
+                                >
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell
+
+                                            key={cell.id}
+                                            className="px-6 py-4 whitespace-nowrap"
+                                        >
+                                            {
+                                                flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext(),
+
+
+
+                                                )
+
+                                            }
+>>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
                                         </TableCell>
                                         <TableCell>
                                             {product.brand}
