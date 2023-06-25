@@ -8,6 +8,8 @@ export default async function handler(
   switch (method) {
     case "GET":
       return res.json({ message: "GET" })
+    case "PUT":
+      return res.json({ message: "PUT" })
     case "POST":
       return res.json({ message: "POST" })
     default:

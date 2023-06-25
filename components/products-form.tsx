@@ -14,12 +14,19 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Title } from "@radix-ui/react-toast"
+import {
+    useMutation,
+    useQueryClient,
+
+} from '@tanstack/react-query'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 const INITIAL_FORM_VALUES = {
-    name: "",
-    brand: "",
-    description: "",
-    price: "",
-    quantity: "",
+    id: "asdasd5484",
+    name: "Laptop",
+    brand: "Asus",
+    description: "A laptop for gaming and work.",
+    price: '250',
+    quantity: '11',
     status: "",
 }
 
@@ -32,49 +39,60 @@ const formSchema = z.object({
         message: "Model name must be at least 2 characters.",
     }),
     description: z.string().min(10),
-    price: z.number().min(1, {
-        message: "Price must be at least 1.",
+    price: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
+        message: "Expected number, received an string"
     }),
-    quantity: z.number().min(1, {
-        message: "Quantity must be at least 1.",
-    }).max(500, {
-        message: "Quantity must be at most 500.",
+    quantity: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
+        message: "Expected number, received an string"
     }),
-    status: z.enum(["pending", "processing", "success", "failed"]),
 
 
 })
 
+
 export function ProductForm() {
     const form = useForm({
         resolver: zodResolver(formSchema),
+        defaultValues: INITIAL_FORM_VALUES,
     });
+    const queryClient = useQueryClient()
 
 
-    function onSubmit(data: any) {
-        console.log(data);
-        // Lógica para enviar el formulario y luego llamar a fetchProducts
-        fetch("http://localhost:3001/products", {
-            method: "PUT",
+    const postProduct = async (newProduct: any) => {
+        const res = await fetch('http://localhost:3001/products', {
+            method: 'POST',
+            body: JSON.stringify(newProduct),
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data),
         })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result); // Puedes mostrar una notificación o mensaje de éxito si lo deseas
+        return res.json()
+    }
+
+    const mutation = useMutation({
+        mutationFn: postProduct,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['products']
             })
-            .catch((error) => {
-                console.error("Error al enviar el formulario", error);
-            });
+        },
+    }
+
+    )
+
+
+
+
+    const onSubmit = (data: any) => {
+        mutation.mutate(data)
+        console.log(data)
     }
 
 
 
     return (
         <Form  {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md space-y-8 rounded-lg border-1 p-7 ">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md space-y-8 rounded-lg max-h-[550px] border-1 p-7 ">
                 <Title>
                     <h2 className="text-2xl font-bold">Add Product</h2>
                 </Title>
@@ -126,10 +144,12 @@ export function ProductForm() {
                         control={form.control}
                         name="price"
                         render={({ field }) => (
+
                             <FormItem>
                                 <FormLabel>Price</FormLabel>
                                 <FormControl>
-                                    <Input type="number" defaultValue={5} placeholder="$ 40.59" {...field} />
+                                    <Input type="number"  {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -142,7 +162,30 @@ export function ProductForm() {
                             <FormItem>
                                 <FormLabel>Quantity</FormLabel>
                                 <FormControl>
-                                    <Input type="number" placeholder="3 " {...field} />
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="status"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Status</FormLabel>
+                                <FormControl>
+                                    <Select>
+                                        <SelectTrigger className="w-[180px]">
+                                            <SelectValue placeholder="pending" />
+                                            <SelectContent position="popper">
+                                                <SelectItem {...field} value="in stock" >in stock</SelectItem>
+                                                <SelectItem {...field} value="sold out">sold out</SelectItem>
+                                                <SelectItem {...field} value="on sale">on sale</SelectItem>
+                                                <SelectItem {...field} value="for pricing">for pricing</SelectItem>
+                                            </SelectContent>
+                                        </SelectTrigger>
+                                    </Select>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -151,15 +194,15 @@ export function ProductForm() {
                 </div >
                 <div className="flex justify-between">
 
-                    <Button className="px-14" type="submit">Submit</Button>
+                    <Button className="px-14" type="submit" >Submit</Button>
 
                     <Button onClick={
                         () => {
                             form.reset(INITIAL_FORM_VALUES)
                         }
-                    } className="px-14" variant='outline'>Cancel</Button>
+                    } className="px-14" type="reset" variant='outline'>Clear</Button>
                 </div>
             </form>
-        </Form>
+        </Form >
     )
 }

@@ -5,7 +5,7 @@
       "name": "Short",
       "brand": "Under Armour",
       "description": "Short products description",
-      "status": "processing",
+      "status": "sold out",
       "price": 40.59,
       "quantity": 10
     },
@@ -14,18 +14,69 @@
       "name": "Short",
       "brand": "Under Armour",
       "description": "Short products description",
-      "status": "processing",
+      "status": "for pricing",
       "price": 80.58,
       "quantity": 10
     },
     {
-      "id": "7858ed51f",
-      "name": "Short",
-      "brand": "Under Armour",
-      "description": "Short products description",
-      "status": "processing",
-      "price": 80.58,
-      "quantity": 10
+      "name": "Laptop",
+      "brand": "HP",
+      "description": "A laptop for gaming and work.",
+      "price": 10,
+      "quantity": 2,
+      "status": "pending",
+      "id": "VRUC9H6"
+    },
+    {
+      "name": "Laptop",
+      "brand": "HP",
+      "description": "A laptop for gaming and work.",
+      "price": 10,
+      "quantity": 2,
+      "status": "pending",
+      "id": "QPCmAvy"
+    },
+    {
+      "name": "Laptop",
+      "brand": "HP",
+      "description": "A laptop for gaming and work.",
+      "price": 10,
+      "quantity": 2,
+      "status": "pending",
+      "id": "MWFzJzm"
+    },
+    {
+      "name": "Laptop",
+      "brand": "HP",
+      "description": "A laptop for gaming and work.",
+      "price": "15",
+      "quantity": 2,
+      "status": "pending",
+      "id": "79tflnZ"
+    },
+    {
+      "name": "Laptop",
+      "brand": "Asus",
+      "description": "A laptop for gaming and work.",
+      "price": "250",
+      "quantity": "11",
+      "id": "Xu3o1kZ"
+    },
+    {
+      "name": "Paula Brooks",
+      "brand": "Nihil similique quam",
+      "description": "Voluptate nostrud no",
+      "price": "595",
+      "quantity": "922",
+      "id": "P8Xtpij"
+    },
+    {
+      "name": "Laptop",
+      "brand": "Asus",
+      "description": "A laptop for gaming and work.",
+      "price": "250",
+      "quantity": "11",
+      "id": "6OQ8WE3"
     }
   ]
 }
