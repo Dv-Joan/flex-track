@@ -1,94 +1,16 @@
 {
   "products": [
     {
-      "id": "7218ed52f",
-      "name": "Short",
-      "brand": "Under Armour",
-      "description": "Short products description",
-      "status": "sold out",
-      "price": 40.59,
-      "quantity": 10
+      "title": "Men's UA Freedom Eagle T-Shirt",
+      "description": "Ultra-comfortable fit and feel, while giving you the sweat-wicking, heat-battling & performance benefits",
+      "imageSrc": "https://underarmour.scene7.com/is/image/Underarmour/PS1363510-824_HB?rp=standard-0pad|gridTileDesktop&scl=1&fmt=jpg&qlt=50&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=512&hei=640&size=512,640",
+      "alt": "ua-shirt"
     },
     {
-      "id": "7218ed51f",
-      "name": "Short",
-      "brand": "Under Armour",
-      "description": "Short products description",
-      "status": "for pricing",
-      "price": 80.58,
-      "image": "https://picsum.photos/200",
-      "quantity": 10
-    },
-    {
-<<<<<<< HEAD
-      "name": "Laptop",
-      "brand": "HP",
-      "description": "A laptop for gaming and work.",
-      "price": 10,
-      "quantity": 2,
-      "status": "pending",
-      "id": "VRUC9H6"
-    },
-    {
-      "name": "Laptop",
-      "brand": "HP",
-      "description": "A laptop for gaming and work.",
-      "price": 10,
-      "quantity": 2,
-      "status": "pending",
-      "id": "QPCmAvy"
-    },
-    {
-      "name": "Laptop",
-      "brand": "HP",
-      "description": "A laptop for gaming and work.",
-      "price": 10,
-      "quantity": 2,
-      "status": "pending",
-      "id": "MWFzJzm"
-    },
-    {
-      "name": "Laptop",
-      "brand": "HP",
-      "description": "A laptop for gaming and work.",
-      "price": "15",
-      "quantity": 2,
-      "status": "pending",
-      "id": "79tflnZ"
-    },
-    {
-      "name": "Laptop",
-      "brand": "Asus",
-      "description": "A laptop for gaming and work.",
-      "price": "250",
-      "quantity": "11",
-      "id": "Xu3o1kZ"
-    },
-    {
-      "name": "Paula Brooks",
-      "brand": "Nihil similique quam",
-      "description": "Voluptate nostrud no",
-      "price": "595",
-      "quantity": "922",
-      "id": "P8Xtpij"
-    },
-    {
-      "name": "Laptop",
-      "brand": "Asus",
-      "description": "A laptop for gaming and work.",
-      "price": "250",
-      "quantity": "11",
-      "id": "6OQ8WE3"
-=======
-      "id": "7858ed51f",
-      "name": "Short",
-      "brand": "Under Armour",
-      "description": "Short products description",
-      "status": "processing",
-      "price": 80.58,
-      "image": "https://picsum.photos/200",
-      "quantity": 10
->>>>>>> ec34e787141c3b3aefbfd647269311a30c884737
+      "title": "Men's UA Vanish Woven 2-in-1 Pride Shorts",
+      "description": "This year's UA Pride collection supports Unmatched Athlete, WorldPride, and Rainbow Labs",
+      "imageSrc": "https://underarmour.scene7.com/is/image/Underarmour/V5-1378910-001_BC?rp=standard-0pad|gridTileDesktop&scl=1&fmt=jpg&qlt=50&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=512&hei=640&size=512,640",
+      "alt": "ua-shirt"
     }
   ]
 }
